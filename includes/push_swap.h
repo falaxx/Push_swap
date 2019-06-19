@@ -9,10 +9,15 @@ typedef struct	s_p
 {
 	long	*a;
 	long	*b;
+	long 	*clone;
+	long	min[10];
+	long	max[10];
 	int		size;
 	int		done;
+	int		nb;
 }				t_p;
 
+t_p		algo(t_p *p);
 t_p		sa(t_p *p);
 t_p		sb(t_p *p);
 t_p		ss(t_p *p);

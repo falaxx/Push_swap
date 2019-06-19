@@ -4,7 +4,9 @@ NAME2 = checker
 
 SRC_PATH = src
 
-SRC_NAME = main.c swap.c push.c rotate.c rrotate.c
+SRC2_PATH = src2
+
+SRC_NAME = main.c swap.c push.c rotate.c rrotate.c algo.c
 
 SRC2_NAME = main2.c
 
@@ -34,17 +36,25 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
 HEADER = $(addprefix $(HEADER_PATH)/,$(HEADER_NAME))
 
-all: $(NAME)
+all: $(NAME) $(NAME2)
 
 $(NAME): $(OBJ)
+	make -C libft/
+	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $^ -o $@
+
+$(NAME2): $(OBJ2)
 	make -C libft/
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $^ -o $@
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -I $(HEADER_PATH) -o $@ -c $<
 
+$(OBJ_PATH2)/%.o: $(SRC2_PATH)/%.c | $(OBJ_PATH2)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I $(HEADER_PATH) -o $@ -c $<
+
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
+
 
 clean:
 	make clean -C libft/
