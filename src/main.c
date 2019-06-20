@@ -24,7 +24,21 @@ int main(int ac, char **av)
 		i++;
 	}
 	i = 0;
-
+	// p.tab = p.size / 10 + 3;
+	p.tab = 1;
+	if (p.tab > 10)
+		p.tab = 10;
+	if (!(p.min = (long *)malloc(sizeof(long) * p.tab)))
+		exit(0); //ft_exit
+	if (!(p.max = (long *)malloc(sizeof(long) * p.tab)))
+		exit(0);
+	while(i < p.tab)
+	{
+		p.max[i] = 10000000000;
+		p.min[i] = 10000000000;
+		i++;
+	}
+	i = 0;
 	// p = pb(&p);
 	// p = pb(&p);
 	//
@@ -48,13 +62,31 @@ int main(int ac, char **av)
 
 	while( i < p.size )
 	{
-		printf("clone[%d] = %ld\n",i, p.clone[i]);
+		printf("a[%d] = %ld\n",i, p.a[i]);
+		i++;
+	}
+	i = 0;
+	while( i < p.size )
+	{
+		printf("b[%d] = %ld\n",i, p.b[i]);
 		i++;
 	}
 	i = 0;
 	// while( i < p.size )
 	// {
-	// 	printf("b[%d] = %ld\n",i, p.b[i]);
+	// 	printf("clone[%d] = %ld\n",i, p.clone[i]);
+	// 	i++;
+	// }
+	// i = 0;
+	// while( i < 10 )
+	// {
+	// 	printf("min[%d] = %ld\n",i, p.min[i]);
+	// 	i++;
+	// }
+	// i = 0;
+	// while( i < 10 )
+	// {
+	// 	printf("max[%d] = %ld\n",i, p.max[i]);
 	// 	i++;
 	// }
 	// printf("%d felix \n / toutsas",10000000000);
