@@ -90,14 +90,16 @@ t_p		is_min_max(t_p *p)
 			if (find_in_tab(p->a[i], p->max, p->tab) == 1)
 			{
 				*p = pb(p);
-				*p = rb(p);
+				// *p = rb(p);
+				p->nb += 1;
 				j--;
 			}
 			if (find_in_tab(p->a[p->size-1], p->max, p->tab) == 1)
 			{
 				*p = rra(p);
 				*p = pb(p);
-				*p = rb(p);
+				// *p = rb(p);
+				p->nb += 2;
 				j--;
 			}
 		}
@@ -106,12 +108,16 @@ t_p		is_min_max(t_p *p)
 			if (find_in_tab(p->a[i], p->min, p->tab) == 1)
 			{
 				*p = pb(p);
+				*p = rb(p);
+				p->nb += 2;
 				k--;
 			}
 			if (find_in_tab(p->a[p->size-1], p->min, p->tab) == 1)
 			{
 				*p = rra(p);
 				*p = pb(p);
+				*p = rb(p);
+				p->nb += 3;
 				k--;
 			}
 		}
@@ -120,8 +126,44 @@ t_p		is_min_max(t_p *p)
 			break;
 		// printf("j = %d k = %d",j,k);
 		*p = ra(p);
+		p->nb += 1;
 	}
 	p->done = 1;
+	return (*p);
+}
+t_p find_max(t_p *p)
+{
+	int max;
+	int i = 0;
+	int j = 0;
+	int dis = 0;
+
+	while (p->b[i] == 10000000000)
+		i++;
+	j = i;
+	max = p->b[i];
+	while (i < p->size)
+	{
+		if (p->b[i] > max)
+		{
+			max = p->b[i];
+			dis = i;
+		}
+		i++;
+	}
+	i = 0;
+	while (p->b[i] == 10000000000)
+		i++;
+	while(p->b[i] != max)
+	{
+		if(dis - j < p->size - dis)
+			*p = rb(p);
+		else
+			*p = rrb(p);
+		p->nb += 1;
+	}
+	*p = pa(p);
+	p->nb += 1;
 	return (*p);
 }
 
@@ -156,6 +198,11 @@ t_p		algo(t_p *p)
 			// break;
 	}
 
-	// }
+	while(p->done < 3)
+	{
+		*p = find_max(p);
+		if (p->b[p->size - 1] == 10000000000)
+			p->done = 3;
+	}
 	return(*p);
 }

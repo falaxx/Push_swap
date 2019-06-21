@@ -24,8 +24,8 @@ int main(int ac, char **av)
 		i++;
 	}
 	i = 0;
-	// p.tab = p.size / 10 + 3;
-	p.tab = 1;
+	p.tab = p.size / 10 + 3;
+	// p.tab = 1;
 	if (p.tab > 10)
 		p.tab = 10;
 	if (!(p.min = (long *)malloc(sizeof(long) * p.tab)))
@@ -72,6 +72,7 @@ int main(int ac, char **av)
 		i++;
 	}
 	i = 0;
+	printf("nb operations = %d",p.nb);
 	// while( i < p.size )
 	// {
 	// 	printf("clone[%d] = %ld\n",i, p.clone[i]);
