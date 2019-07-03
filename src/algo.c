@@ -79,7 +79,7 @@ t_p		is_min_max(t_p *p)
 	int k = 0;
 
 	j = p->sizemax;
-	k =  p->sizemin;
+	k = p->sizemin;
 
 	while(k + j > 0)
 	{

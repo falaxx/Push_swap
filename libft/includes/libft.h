@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 14:38:20 by fmerding          #+#    #+#             */
-/*   Updated: 2019/06/05 19:43:54 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/06/22 12:48:00 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,5 @@ int					ft_getnbr_n(char *str, int n);
 char				*ft_strcapitalize(char *str);
 void				ft_display_file(char *str);
 int					get_next_line(const int fd, char **line);
+long				ft_atol(const char *nptr);
 #endif

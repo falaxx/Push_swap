@@ -11,7 +11,7 @@ void	swap(long *a, long *b)
 	*b = tmpa;
 }
 
-t_p sa(t_p *p)
+t_p sa(t_p *p, int mode)
 {
 	int i = 0;
 	while(i < p->size)
@@ -21,11 +21,12 @@ t_p sa(t_p *p)
 		swap(&(p->a[i]),&(p->a[i+1]));
 		break;
 	}
-	ft_putstr("sa\n");
+	if (mode == 1)
+		ft_putstr("sa\n");
 	return (*p);
 }
 
-t_p sb(t_p *p)
+t_p sb(t_p *p, int mode)
 {
 	int i = 0;
 	while(i < p->size)
@@ -35,11 +36,12 @@ t_p sb(t_p *p)
 		swap(&(p->b[i]),&(p->b[i+1]));
 		break;
 	}
-	ft_putstr("sb\n");
+	if (mode == 1)
+		ft_putstr("sb\n");
 	return (*p);
 }
 
-t_p ss(t_p *p)
+t_p ss(t_p *p, int mode)
 {
 	int i = 0;
 	while(i < p->size)
@@ -57,6 +59,7 @@ t_p ss(t_p *p)
 		swap(&(p->a[i]),&(p->a[i+1]));
 		break;
 	}
-	ft_putstr("ss\n");
+	if (mode == 1)
+		ft_putstr("ss\n");
 	return (*p);
 }

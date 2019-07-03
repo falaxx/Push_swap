@@ -2,23 +2,14 @@
 
 void	ft_exit(t_p *p, int i)
 {
-	int j = 0;
 	if (i == 0)
 		ft_putstr("Error\n");
 	if (p->a != NULL)
-	{
 		ft_memdel((void **)&p->a);
-	}
-	j = 0;
 	if (p->b != NULL)
-	{
 		ft_memdel((void **)&p->b);
-	}
-	j = 0;
 	if (p->clone != NULL)
-	{
 		ft_memdel((void **)&p->clone);
-	}
 	exit(0);
 }
 
@@ -80,17 +71,6 @@ int		main(int ac, char **av)
 	}
 	i = 0;
 	p.tab = p.size / 20 + 1;
-	if (!(p.min = (long *)malloc(sizeof(long) * p.tab)))
-		exit(0); //ft_exit
-	if (!(p.max = (long *)malloc(sizeof(long) * p.tab)))
-		exit(0);
-	while(i < p.tab)
-	{
-		p.max[i] = 10000000000;
-		p.min[i] = 10000000000;
-		i++;
-	}
-	i = 0;
 	// while( i < p.size )
 	// {
 	// 	printf("a[%d] = %ld\n",i, p.a[i]);
@@ -102,7 +82,17 @@ int		main(int ac, char **av)
 	// 	printf("b[%d] = %ld\n",i, p.b[i]);
 	// 	i++;
 	// }
-	p = algo(&p);
+	if (p.size < 5)
+		p = brute_force(&p);
+	// if (p.size > 4)
+	// 	p = algo(&p);
+	i = 0;
+	// while( i < p.size )
+	// {
+	// 	printf("clone[%d] = %ld\n",i, p.clone[i]);
+	// 	i++;
+	// }
+	i = 0;
 	// i = 0;
 	//
 	// while( i < p.size )
@@ -117,25 +107,6 @@ int		main(int ac, char **av)
 	// 	i++;
 	// }
 	i = 0;
-	printf("nb operations = %d",p.nb);
-	// while( i < p.size )
-	// {
-	// 	printf("clone[%d] = %ld\n",i, p.clone[i]);
-	// 	i++;
-	// }
-	// i = 0;
-	// while( i < 10 )
-	// {
-	// 	printf("min[%d] = %ld\n",i, p.min[i]);
-	// 	i++;
-	// }
-	// i = 0;
-	// while( i < 10 )
-	// {
-	// 	printf("max[%d] = %ld\n",i, p.max[i]);
-	// 	i++;
-	// }
-	// printf("%d felix \n / toutsas",10000000000);
-	// sort tab print chaque actions;
+	// printf("nb operations = %d",p.nb);
 
 }

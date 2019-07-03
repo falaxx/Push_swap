@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-t_p ra(t_p *p)
+t_p ra(t_p *p, int mode)
 {
 	int i = 0;
 	int j = 0;
@@ -14,11 +14,12 @@ t_p ra(t_p *p)
 		i++;
 	}
 	swap(&(p->a[i]),&(p->a[j]));
-	ft_putstr("ra\n");
+	if (mode == 1)
+		ft_putstr("ra\n");
 	return (*p);
 }
 
-t_p rb(t_p *p)
+t_p rb(t_p *p, int mode)
 {
 	int j = 0;
 	int i = 0;
@@ -32,11 +33,12 @@ t_p rb(t_p *p)
 		i++;
 	}
 	swap(&(p->b[i]),&(p->b[j]));
-	ft_putstr("rb\n");
+	if (mode == 1)
+		ft_putstr("rb\n");
 	return (*p);
 }
 
-t_p rr(t_p *p)
+t_p rr(t_p *p, int mode)
 {
 	int j = 0;
 	int i = 0;
@@ -61,6 +63,7 @@ t_p rr(t_p *p)
 		i++;
 	}
 	swap(&(p->a[i]),&(p->a[j]));
-	ft_putstr("rr\n");
+	if (mode == 1)
+		ft_putstr("rr\n");
 	return (*p);
 }
