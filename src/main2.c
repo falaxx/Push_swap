@@ -82,7 +82,7 @@ int		main(int ac, char **av)
 	// 	printf("b[%d] = %ld\n",i, p.b[i]);
 	// 	i++;
 	// }
-	if (p.size < 5)
+	// if (p.size < 10)
 		p = brute_force(&p);
 	// if (p.size > 4)
 	// 	p = algo(&p);
@@ -95,17 +95,17 @@ int		main(int ac, char **av)
 	i = 0;
 	// i = 0;
 	//
-	// while( i < p.size )
-	// {
-	// 	printf("a[%d] = %ld\n",i, p.a[i]);
-	// 	i++;
-	// }
-	// i = 0;
-	// while( i < p.size )
-	// {
-	// 	printf("b[%d] = %ld\n",i, p.b[i]);
-	// 	i++;
-	// }
+	while( i < p.size )
+	{
+		printf("a[%d] = %ld\n",i, p.a[i]);
+		i++;
+	}
+	i = 0;
+	while( i < p.size )
+	{
+		printf("b[%d] = %ld\n",i, p.b[i]);
+		i++;
+	}
 	i = 0;
 	// printf("nb operations = %d",p.nb);
 
