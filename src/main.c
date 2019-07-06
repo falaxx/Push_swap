@@ -1,96 +1,152 @@
 #include "push_swap.h"
 
-void	ft_exit(t_p *p, int i)
+void	ft_exit(int i)
 {
-	int j = 0;
 	if (i == 0)
 		ft_putstr("Error\n");
-	if (p->a != NULL)
-	{
-		ft_memdel((void **)&p->a);
-	}
-	j = 0;
-	if (p->b != NULL)
-	{
-		ft_memdel((void **)&p->b);
-	}
-	j = 0;
-	if (p->clone != NULL)
-	{
-		ft_memdel((void **)&p->clone);
-	}
+		while(1);
 	exit(0);
 }
 
-int		check(char **av, t_p *p)
+int		check(char *av)
 {
 	int i = 0;
-	int j = 0;
-	int k = 0;
 
-	while (i < p->size)
+	if (ft_strlen(av) > 11 || av == '\0')
+		ft_exit(0);
+	if (ft_atol(av) > 2147483647 || ft_atol(av) < -2147483648)
+		ft_exit(0);
+	while(av[i] != '\0')
 	{
-		if (ft_strlen(av[i+1]) > 11 || av[i+1][0] == '\0')
-			ft_exit(p, 0);
-		if (ft_atol(av[i+1]) > 2147483647 || ft_atol(av[i+1]) < -2147483648)
-			ft_exit(p, 0);
-		j = 0;
-		while(av[i+1][j] != '\0')
-		{
-			if (av[i+1][j] != '-' && ft_isdigit(av[i+1][j]) == 0)
-				ft_exit(p, 0);
-			k = i + 1;
-			while (k < p->size)
-			{
-				if (ft_strcmp(av[i+1],av[k+1]) == 0)
-					ft_exit(p, 0);
-				k++;
-			}
-			j++;
-		}
+		if (av[i] != '-' && ft_isdigit(av[i]) == 0)
+			ft_exit(0);
+		else if (av[i] == '-' && ft_isdigit(av[i + 1]) == 0)
+			ft_exit(0);
 		i++;
 	}
 	return (0);
 }
+
+void	init(char ***split, t_p *p)
+{
+	long	a[p->size];
+	long	b[p->size];
+	long	clone[p->size];
+	int		i;
+
+	i = 0;
+	p->a = a;
+	p->b = b;
+	p->clone = clone;
+	while (i < p->size)
+	{
+		a[i] = 10000000000;
+		b[i] = 10000000000;
+		clone[i] = 10000000000;
+		p->a[i] = a[i];
+		p->b[i] = b[i];
+		p->clone[i] = clone[i];
+		i++;
+	}
+	fill(split, p);
+	p->done = 0;
+	p->nb = 0;
+}
+
+void free_split(char ***split, int ac)
+{
+	int i;
+	int k;
+	int j;
+
+	i = 0;
+	k = 0;
+
+	while (i < ac)
+	{
+		j = 0;
+		while(split[i][j] != 0)
+		{
+			free(split[i][j]);
+			j++;
+			k++;
+		}
+		free(split[i]);
+		i++;
+	}
+	while(1);
+	exit(0);
+}
+
+void split(char **av, t_p *p, int ac)
+{
+	int i;
+	int j;
+	char **split[ac];
+
+	i = 0;
+	while (i < ac)
+	{
+		j = 0;
+		split[i] = ft_strsplit(av[i+1], ' ');
+		while (split[i][j] != 0)
+		{
+			check(split[i][j]);
+			j++;
+			p->size++;
+		}
+		i++;
+	}
+	init(split, p);
+	free_split(split, ac);
+}
+
 int		main(int ac, char **av)
 {
-	t_p 	p;
-	int 	i = 0;
+	t_p	p;
+	int	i;
+	int	j;
 
-	p.size = ac - 1;
-	p.done = 0;
-	p.nb = 0;
+	i = 0;
+	j = 0;
+	p.ac = ac -1;
+	p.size = 0;
 	p.a = NULL;
 	p.b = NULL;
 	p.clone = NULL;
-	if (!(p.a = (long *)malloc(sizeof(long) * p.size)))
-		ft_exit(&p, 1); //ft_exit
-	if (!(p.b = (long *)malloc(sizeof(long) * p.size)))
-		ft_exit(&p, 1);
-	if (!(p.clone = (long *)malloc(sizeof(long) * p.size)))
-		ft_exit(&p, 1);
 	if (ac == 1)
-		ft_exit(&p, 0);
-	check(av, &p);
-	while(i < p.size)
-	{
-		p.a[i] = ft_getnbr_n(av[i + 1], 0);
-		p.b[i] = 10000000000;
-		i++;
-	}
+		ft_exit(0);
+	split(av, &p, p.ac);
+
+	// while (i < p.size -2)
+	// {
+	// 	j = 0;
+	// 	// p->split[i] = ft_strsplit(av[i+1], ' ');
+	// 	while (p.split[i][j] != 0)
+	// 	{
+	// 		// check(p->split[i][j], p);
+	// 		printf("%s\n",p.split[i][j]);
+	// 		j++;
+	// 		// p->size++;
+	// 	}
+	// 	i++;
+	// }
+
+	// check(av, &p);
+	// if (!(p.a = (long *)malloc(sizeof(long) * p.size)))
+	// 	ft_exit(&p, 1); //ft_exit
+	// if (!(p.b = (long *)malloc(sizeof(long) * p.size)))
+	// 	ft_exit(&p, 1);
+	// if (!(p.clone = (long *)malloc(sizeof(long) * p.size)))
+	// 	ft_exit(&p, 1);
+	// while(i < p.size)
+	// {
+	// 	p.a[i] = ft_getnbr_n(av[i + 1], 0);
+	// 	p.b[i] = 10000000000;
+	// 	i++;
+	// }
 	i = 0;
-	p.tab = p.size / 20 + 1;
-	if (!(p.min = (long *)malloc(sizeof(long) * p.tab)))
-		exit(0); //ft_exit
-	if (!(p.max = (long *)malloc(sizeof(long) * p.tab)))
-		exit(0);
-	while(i < p.tab)
-	{
-		p.max[i] = 10000000000;
-		p.min[i] = 10000000000;
-		i++;
-	}
-	i = 0;
+	// p.tab = p.size / 20 + 1;
 	// while( i < p.size )
 	// {
 	// 	printf("a[%d] = %ld\n",i, p.a[i]);
@@ -102,7 +158,17 @@ int		main(int ac, char **av)
 	// 	printf("b[%d] = %ld\n",i, p.b[i]);
 	// 	i++;
 	// }
-	p = algo(&p);
+	// if (p.size < 10)
+		// p = brute_force(&p);
+	// if (p.size > 4)
+	// 	p = algo(&p);
+	// i = 0;
+	// while( i < p.size )
+	// {
+	// 	printf("clone[%d] = %ld\n",i, p.clone[i]);
+	// 	i++;
+	// }
+	// i = 0;
 	// i = 0;
 	//
 	// while( i < p.size )
@@ -116,26 +182,6 @@ int		main(int ac, char **av)
 	// 	printf("b[%d] = %ld\n",i, p.b[i]);
 	// 	i++;
 	// }
-	i = 0;
-	printf("nb operations = %d",p.nb);
-	// while( i < p.size )
-	// {
-	// 	printf("clone[%d] = %ld\n",i, p.clone[i]);
-	// 	i++;
-	// }
 	// i = 0;
-	// while( i < 10 )
-	// {
-	// 	printf("min[%d] = %ld\n",i, p.min[i]);
-	// 	i++;
-	// }
-	// i = 0;
-	// while( i < 10 )
-	// {
-	// 	printf("max[%d] = %ld\n",i, p.max[i]);
-	// 	i++;
-	// }
-	// printf("%d felix \n / toutsas",10000000000);
-	// sort tab print chaque actions;
-
+	// printf("nb operations = %d",p.nb);
 }

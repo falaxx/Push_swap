@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-char *next_try(char *try)
+void	next_try(char *try)
 {
 	int i = 0;
 	int j = 0;
@@ -32,10 +32,9 @@ char *next_try(char *try)
 			try[i + 1] = 'a';
 		}
 	}
-	return (try);
 }
 
-t_p apply_try(char *str, t_p *p, int mode)
+void apply_try(char *str, t_p *p, int mode)
 {
 	int i = 0;
 	while(str[i] != '\0')
@@ -43,22 +42,19 @@ t_p apply_try(char *str, t_p *p, int mode)
 	while(i >= 0)
 	{
 		if (str[i] == 'a')
-			*p = sa(p, mode);
+			sa(p, mode);
 		if (str[i] == 'b')
-			*p = rra(p, mode);
+			rra(p, mode);
 		if (str[i] == 'c')
-			*p = ra(p, mode);
+			ra(p, mode);
 		i--;
 	}
-	return (*p);
 }
 
-t_p brute_force(t_p *p)
+void brute_force(t_p *p)
 {
 	int i = 0;
-	char *try = NULL;
-	if (!(try = (char *)malloc(sizeof(char) * 20)))
-		exit(0); //ft_exit
+	char try[20];
 	ft_bzero(try, 20);
 	try[0] = 'a';
 	while(i < p->size)
@@ -67,7 +63,7 @@ t_p brute_force(t_p *p)
 		i++;
 	}
 	if (is_sorted(p->size, p->a) == 1 && p->b[p->size -1] == 10000000000)
-		ft_exit(p, 1);
+		ft_exit(1);
 	while(1)
 	{
 		while(i < p->size)
@@ -82,7 +78,7 @@ t_p brute_force(t_p *p)
 		if (is_sorted(p->size, p->a) == 1 && p->b[p->size -1] == 10000000000)
 			break;
 		i = 0;
-		try = next_try(try);
+		next_try(try);
 		// sleep(1);
 	}
 	i = 0;
@@ -97,5 +93,5 @@ t_p brute_force(t_p *p)
 	// exit(0);
 	// if (try[0] != 'a' && try[1] != '\0')
 	apply_try(try, p, 1);
-	return(*p);
+	// free(try);
 }

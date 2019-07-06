@@ -6,7 +6,7 @@ SRC_PATH = src
 
 SRC2_PATH = src2
 
-SRC_NAME = main2.c swap.c push.c rotate.c rrotate.c algo2.c brute_force.c
+SRC_NAME = main.c swap.c push.c rotate.c rrotate.c algo2.c brute_force.c check_fill.c
 
 SRC2_NAME = main2.c
 
@@ -16,7 +16,7 @@ LDFLAGS = -L libft/ -lft  -L /usr/local/include/
 
 CC = gcc
 
-CFLAGS =
+CFLAGS = -Werror -Wall -Wextra
 # -Werror -Wall -Wextra
 # -g -fsanitize=address
 

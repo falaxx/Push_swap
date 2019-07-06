@@ -1,57 +1,69 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rrotate.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/06 20:48:58 by fmerding          #+#    #+#             */
+/*   Updated: 2019/07/06 20:51:40 by fmerding         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-t_p rra(t_p *p, int mode)
+void	rra(t_p *p, int mode)
 {
-	int i = p->size - 2;
+	int i;
 
-	while(i >= 0)
+	i = p->size - 2;
+	while (i >= 0)
 	{
 		if (p->a[i] == 10000000000)
-			break;
-		swap(&(p->a[i]),&(p->a[i+1]));
+			break ;
+		swap(&(p->a[i]), &(p->a[i + 1]));
 		i--;
 	}
 	if (mode == 1)
 		ft_putstr("rra\n");
-	return (*p);
 }
 
-t_p rrb(t_p *p, int mode)
+void	rrb(t_p *p, int mode)
 {
-	int i = p->size - 2;
+	int i;
 
-	while(i >= 0)
+	i = p->size - 2;
+	while (i >= 0)
 	{
 		if (p->b[i] == 10000000000)
-			break;
-		swap(&(p->b[i]),&(p->b[i+1]));
+			break ;
+		swap(&(p->b[i]), &(p->b[i + 1]));
 		i--;
 	}
 	if (mode == 1)
 		ft_putstr("rrb\n");
-	return (*p);
 }
 
-t_p rrr(t_p *p, int mode)
+void	rrr(t_p *p, int mode)
 {
-	int i = p->size - 2;
+	int i;
 
-	while(i >= 0)
+	i = p->size - 2;
+	while (i >= 0)
 	{
 		if (p->b[i] == 10000000000)
-			break;
-		swap(&(p->b[i]),&(p->b[i+1]));
+			break ;
+		swap(&(p->b[i]), &(p->b[i + 1]));
 		i--;
 	}
 	i = p->size - 2;
-	while(i >= 0)
+	while (i >= 0)
 	{
 		if (p->a[i] == 10000000000)
-			break;
-		swap(&(p->a[i]),&(p->a[i+1]));
+			break ;
+		swap(&(p->a[i]), &(p->a[i + 1]));
 		i--;
 	}
 	if (mode == 1)
 		ft_putstr("rr\n");
-	return (*p);
 }

@@ -13,6 +13,7 @@ int		find_in_tab(long l, long* tab, int size)
 	}
 	return (0);
 }
+
 //
 // t_p		is_min_max(t_p *p)
 // {
@@ -116,7 +117,7 @@ t_p		algo(t_p *p)
 	int size = 0;
 
 	if (is_sorted(p->size, p->a) == 1)
-		ft_exit(p, 1);
+		ft_exit(1);
 	while(p->done < 2)
 	{
 		i = 0;

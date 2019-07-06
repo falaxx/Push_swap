@@ -22,6 +22,7 @@
 
 typedef struct	s_p
 {
+	int		ac;
 	long	*a;
 	long	*b;
 	long 	*clone;
@@ -33,19 +34,20 @@ typedef struct	s_p
 }				t_p;
 
 t_p		algo(t_p *p);
-t_p		sa(t_p *p, int mode);
-t_p		sb(t_p *p, int mode);
-t_p		ss(t_p *p, int mode);
-t_p		pa(t_p *p, int mode);
-t_p		pb(t_p *p, int mode);
-t_p		ra(t_p *p, int mode);
-t_p		rb(t_p *p, int mode);
-t_p		rr(t_p *p, int mode);
-t_p		rra(t_p *p, int mode);
-t_p		rrb(t_p *p, int mode);
-t_p		rrr(t_p *p, int mode);
+void	sa(t_p *p, int mode);
+void	sb(t_p *p, int mode);
+void	ss(t_p *p, int mode);
+void	pa(t_p *p, int mode);
+void	pb(t_p *p, int mode);
+void	ra(t_p *p, int mode);
+void	rb(t_p *p, int mode);
+void	rr(t_p *p, int mode, int i, int j);
+void	rra(t_p *p, int mode);
+void	rrb(t_p *p, int mode);
+void	rrr(t_p *p, int mode);
 void	swap(long *a, long *b);
-void	ft_exit(t_p *p, int mode);
-t_p		brute_force(t_p *p);
+void	ft_exit(int mode);
+void	fill(char ***split, t_p *p);
+void		brute_force(t_p *p);
 int		is_sorted(int size, long* tab);
 #endif
