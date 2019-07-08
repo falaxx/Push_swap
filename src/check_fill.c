@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 20:36:41 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/06 20:48:22 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/08 15:49:53 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_double(t_p *p)
 		while (j < p->size)
 		{
 			if (p->a[i] == p->a[j])
-				ft_exit(0);
+				ft_exit(0, p);
 			j++;
 		}
 		i++;
@@ -46,11 +46,14 @@ void	fill(char ***split, t_p *p)
 		while (split[j][k] != 0)
 		{
 			p->a[i] = ft_getnbr_n(split[j][k], 0);
+			p->b[i] = 10000000000;
+			p->clone[i] = p->a[i];
 			k++;
 			i++;
 		}
 		j++;
 	}
 	check_double(p);
-	brute_force(p);
+	algo(p);
+	// brute_force(p);
 }

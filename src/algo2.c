@@ -2,27 +2,14 @@
 
 
 
-int		find_in_tab(long l, long* tab, int size)
-{
-	int i = 0;
-	while (i < size)
-	{
-		if (tab[i] == l)
-			return (1);
-		i++;
-	}
-	return (0);
-}
+
 
 //
-// t_p		is_min_max(t_p *p)
+// void	apply_algo(p)
 // {
 // 	int i = 0;
 // 	int j = 0;
 // 	int k = 0;
-//
-// 	j = p->sizemax;
-// 	k = p->sizemin;
 //
 // 	while(k + j > 0)
 // 	{
@@ -75,28 +62,29 @@ int		find_in_tab(long l, long* tab, int size)
 // 	return (*p);
 // }
 
-t_p	sort_clone(t_p *p)
+long	*sort(t_p *p, long *tab)
 {
 	int i = 0;
 	int nb = 0;
 
 	while(i < p->size)
 	{
-		if (p->clone[i] != 10000000000)
+		if (tab[i] != 10000000000)
 			nb++;
 		i++;
 	}
 	i = p->size - nb;
 	while(i < p->size - 1)
 	{
-		if (p->clone[i] > p->clone[i+1])
+		if (tab[i] > tab[i+1])
 		{
-			swap(&(p->clone[i]), &(p->clone[i+1]));
+			swap(&(tab[i]), &(tab[i+1]));
 			i = p->size - nb - 1;
 		}
 		i++;
 	}
-	return(*p);
+	p->nb_left = nb;
+	return(tab);
 }
 
 int		is_sorted(int size, long* tab)
@@ -111,47 +99,181 @@ int		is_sorted(int size, long* tab)
 	}
 	return (1);
 }
-t_p		algo(t_p *p)
+
+int		find_in_tab(long l, long* tab, t_p *p, char *mode)
+{
+	int i;
+	int j;
+	int size;
+
+	i = 0;
+	j = 0;
+	size = p->range;
+	while (tab[j] == 10000000000)
+		j++;
+	if (mode[0] == 't')
+	{
+		while (i < size)
+		{
+			if (tab[j + i] == l)
+				return (1);
+			i++;
+		}
+		return (0);
+	}
+	i = p->size -1;
+	j = i - p->range;
+	if (mode[0] == 'b')
+	{
+		while (i > j)
+		{
+			if (tab[i] == l)
+				return (1);
+			i--;
+		}
+	}
+	return (0);
+}
+
+
+void	apply_algo(t_p *p)
+{
+	int i;
+	int k;
+
+	i = 0;
+	k = 0;
+	while (p->a[i] == 10000000000)
+		i++;
+	if (find_in_tab(p->a[i], p->clone, p,
+	"top") == 1)
+	{
+		pb(p, 0);
+		p->nb_operation += 1;
+	}
+	if (find_in_tab(p->a[p->size-1], p->clone, p,
+	"top") == 1)
+	{
+		rra(p, 0);
+		pb(p, 0);
+		p->nb_operation += 2;
+	}
+	if (find_in_tab(p->a[i], p->clone, p,
+	"bot") == 0)
+	{
+		pb(p, 0);
+		rb(p, 0);
+		p->nb_operation += 2;
+	}
+	if (find_in_tab(p->a[p->size-1], p->clone, p,
+		"bot") == 1)
+	{
+		rra(p, 0);
+		pb(p, 0);
+		rb(p, 0);
+		p->nb_operation += 3;
+	}
+	// printf("find in tab %zu = %d \n",p->a[i], find_in_tab(p->a[i], p->a, p->range,"top"));
+	// if (find_in_tab(p->a[p->size-1], p->clone, p->range,
+	// "bot") == 1)
+	// {
+	// 	rra(p, 0);
+	// 	pb(p, 0);
+	// 	p->nb_operation += 2;
+	// }
+	// if (p->nb_left >= p->range)
+	// {
+	// 	// while( k < p->size )
+	// 	// {
+	// 	// 	printf("a[%d] = %ld\n",k, p->a[k]);
+	// 	// 	k++;
+	// 	// }
+	//
+	// 	p->nb_operation += 1;
+	// 	k = 0;
+	// 	// sleep(1);
+	// }
+		ra(p, 0);
+		p->nb_operation++;
+}
+
+void	algo(t_p *p)
 {
 	int i = 0;
-	int size = 0;
-
+	int k = 0;
 	if (is_sorted(p->size, p->a) == 1)
-		ft_exit(1);
-	while(p->done < 2)
+		ft_exit(1, p);
+		while( k < p->size )
+		{
+			printf("a[%d] = %ld\n",k, p->a[k]);
+			k++;
+		}
+		k = 0;
+		while( k < p->size )
+		{
+			printf("b[%d] = %ld\n",k, p->b[k]);
+			k++;
+		}
+	while (1)
 	{
+		// printf("range = %d",p->range);
 		i = 0;
 		while(i < p->size)
 		{
 			p->clone[i] = p->a[i];
 			i++;
-			if (p->a[i] != 10000000000)
-				size++;
 		}
-		*p = sort_clone(p);
-		// *p = is_min_max(p);
-		// i = 0;
-		// while( i < p->sizemin )
+		p->clone = sort(p, p->clone);
+		apply_algo(p);
+		k = 0;
+		// while( k < p->size )
 		// {
-		// 	printf("min[%d] = %ld\n",i, p->min[i]);
-		// 	i++;
+		// 	printf("a[%d] = %ld\n",k, p->a[k]);
+		// 	k++;
 		// }
-		// i = 0;
-		// while( i < p->sizemax )
+		// k = 0;
+		// while( k < p->size )
 		// {
-		// 	printf("max[%d] = %ld\n",i, p->max[i]);
-		// 	i++;
+		// 	printf("b[%d] = %ld\n",k, p->b[k]);
+		// 	k++;
 		// }
-		// if (p->a[p->size - 1] == 10000000000)
-		p->done = 2;
-			// break;
+		// k = 0;
+		// while( k < p->size )
+		// {
+		// 	printf("clone[%d] = %ld\n",k, p->clone[k]);
+		// 	k++;
+		// }
+		if (p->b[0] != 10000000000)
+			break;
 	}
+	k = 0;
+	while( k < p->size )
+	{
+		printf("a[%d] = %ld\n",k, p->a[k]);
+		k++;
+	}
+	k = 0;
+	while( k < p->size )
+	{
+		printf("b[%d] = %ld\n",k, p->b[k]);
+		k++;
+	}
+	k = 0;
+	// while( k < p->size )
+	// {
+	// 	printf("clone[%d] = %ld\n",k, p->clone[k]);
+	// 	k++;
+	// }
+	printf("nb = %d",p->nb_operation);
+	ft_exit(1, p);
 
+	// if (is_sorted(p->size, p->a) == 1 && p->b[p->size -1]
+	// == 10000000000)
+	// p->done = 2;
 	// while(p->done < 3)
 	// {
 	// 	*p = find_max(p);
 	// 	if (p->b[p->size - 1] == 10000000000)
 	// 		p->done = 3;
 	// }
-	return(*p);
 }

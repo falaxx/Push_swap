@@ -1,59 +1,40 @@
 #include "push_swap.h"
 
-void	ft_exit(int i)
+void	ft_exit(int i, t_p *p)
 {
 	if (i == 0)
 		ft_putstr("Error\n");
-		while(1);
+	if (p->a != NULL)
+		free(p->a);
+	if (p->b != NULL)
+		free(p->b);
+	if (p->clone != NULL)
+		free(p->clone);
 	exit(0);
 }
 
-int		check(char *av)
+int		check(char *av, t_p *p)
 {
 	int i = 0;
 
 	if (ft_strlen(av) > 11 || av == '\0')
-		ft_exit(0);
+		ft_exit(0, p);
 	if (ft_atol(av) > 2147483647 || ft_atol(av) < -2147483648)
-		ft_exit(0);
+		ft_exit(0, p);
 	while(av[i] != '\0')
 	{
 		if (av[i] != '-' && ft_isdigit(av[i]) == 0)
-			ft_exit(0);
+			ft_exit(0, p);
 		else if (av[i] == '-' && ft_isdigit(av[i + 1]) == 0)
-			ft_exit(0);
+			ft_exit(0, p);
 		i++;
 	}
 	return (0);
 }
 
-void	init(char ***split, t_p *p)
-{
-	long	a[p->size];
-	long	b[p->size];
-	long	clone[p->size];
-	int		i;
 
-	i = 0;
-	p->a = a;
-	p->b = b;
-	p->clone = clone;
-	while (i < p->size)
-	{
-		a[i] = 10000000000;
-		b[i] = 10000000000;
-		clone[i] = 10000000000;
-		p->a[i] = a[i];
-		p->b[i] = b[i];
-		p->clone[i] = clone[i];
-		i++;
-	}
-	fill(split, p);
-	p->done = 0;
-	p->nb = 0;
-}
 
-void free_split(char ***split, int ac)
+void free_split(char ***split, int ac, t_p *p)
 {
 	int i;
 	int k;
@@ -74,8 +55,19 @@ void free_split(char ***split, int ac)
 		free(split[i]);
 		i++;
 	}
-	while(1);
-	exit(0);
+	ft_exit(1, p);
+}
+
+void	init(char ***split, t_p *p, int ac)
+{
+	if (!(p->a = (long *)malloc(sizeof(long) * (p->size))))
+		free_split(split, ac, p);
+	if (!(p->b = (long *)malloc(sizeof(long) * (p->size))))
+		free_split(split, ac, p);
+	if (!(p->clone = (long *)malloc(sizeof(long) * (p->size))))
+		free_split(split, ac, p);
+	p->range = p->size / 20 + 1;
+	fill(split, p);
 }
 
 void split(char **av, t_p *p, int ac)
@@ -91,14 +83,14 @@ void split(char **av, t_p *p, int ac)
 		split[i] = ft_strsplit(av[i+1], ' ');
 		while (split[i][j] != 0)
 		{
-			check(split[i][j]);
+			check(split[i][j], p);
 			j++;
 			p->size++;
 		}
 		i++;
 	}
-	init(split, p);
-	free_split(split, ac);
+	init(split, p, ac);
+	free_split(split, ac, p);
 }
 
 int		main(int ac, char **av)
@@ -114,8 +106,9 @@ int		main(int ac, char **av)
 	p.a = NULL;
 	p.b = NULL;
 	p.clone = NULL;
+	p.nb_operation = 0;
 	if (ac == 1)
-		ft_exit(0);
+		ft_exit(0, &p);
 	split(av, &p, p.ac);
 
 	// while (i < p.size -2)

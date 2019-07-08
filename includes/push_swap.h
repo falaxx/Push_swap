@@ -26,14 +26,13 @@ typedef struct	s_p
 	long	*a;
 	long	*b;
 	long 	*clone;
-	int		tab;
 	int		size;
-	int		done;
-	int		brute;
-	int		nb;
+	int		range;
+	int		nb_left;
+	int		nb_operation;
 }				t_p;
 
-t_p		algo(t_p *p);
+void	algo(t_p *p);
 void	sa(t_p *p, int mode);
 void	sb(t_p *p, int mode);
 void	ss(t_p *p, int mode);
@@ -46,8 +45,8 @@ void	rra(t_p *p, int mode);
 void	rrb(t_p *p, int mode);
 void	rrr(t_p *p, int mode);
 void	swap(long *a, long *b);
-void	ft_exit(int mode);
+void	ft_exit(int mode, t_p *p);
 void	fill(char ***split, t_p *p);
-void		brute_force(t_p *p);
+void	brute_force(t_p *p);
 int		is_sorted(int size, long* tab);
 #endif
