@@ -66,7 +66,9 @@ void	init(char ***split, t_p *p, int ac)
 		free_split(split, ac, p);
 	if (!(p->clone = (long *)malloc(sizeof(long) * (p->size))))
 		free_split(split, ac, p);
-	p->range = p->size / 20 + 1;
+	p->range = p->size / 15 + 2;
+	if (p->size > 100)
+		p->range = p->size / 40 + 2;
 	fill(split, p);
 }
 

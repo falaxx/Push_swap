@@ -5,21 +5,6 @@
 # include <stdlib.h>
 # include "../libft/includes/libft.h"
 
-// typedef struct	s_p
-// {
-// 	long	*a;
-// 	long	*b;
-// 	long 	*clone;
-// 	long	*min;
-// 	long	*max;
-// 	int		tab;
-// 	int		size;
-// 	int		done;
-// 	int		nb;
-// 	int		sizemin;
-// 	int		sizemax;
-// }				t_p;
-
 typedef struct	s_p
 {
 	int		ac;

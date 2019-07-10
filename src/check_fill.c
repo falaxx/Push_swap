@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 20:36:41 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/08 15:49:53 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/10 15:14:14 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ void	fill(char ***split, t_p *p)
 		j++;
 	}
 	check_double(p);
-	algo(p);
-	// brute_force(p);
+	brute_force(p);
 }
