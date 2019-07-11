@@ -6,7 +6,7 @@ SRC_PATH = src
 
 SRC2_PATH = src2
 
-SRC_NAME = main.c swap.c push.c rotate.c rrotate.c algo2.c brute_force.c check_fill.c
+SRC_NAME = main.c swap.c push.c rotate.c rrotate.c algo.c brute_force.c check_fill.c apply_algo.c find_exit.c
 
 SRC2_NAME = main2.c
 

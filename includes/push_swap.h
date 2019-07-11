@@ -15,6 +15,7 @@ typedef struct	s_p
 	int		range;
 	int		nb_left;
 	int		nb_operation;
+	int		done;
 }				t_p;
 
 void	algo(t_p *p);
@@ -34,4 +35,7 @@ void	ft_exit(int mode, t_p *p);
 void	fill(char ***split, t_p *p);
 void	brute_force(t_p *p);
 int		is_sorted(int size, long* tab);
+void	apply_algo(t_p *p);
+int		find_top(long l, t_p *p, int mode, int i);
+int		find_bot(t_p *p, int mode, int j);
 #endif
