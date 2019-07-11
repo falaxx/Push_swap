@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:50:46 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/11 19:33:45 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/11 20:31:46 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		find_top(long l, t_p *p, int mode, int i)
 void	ft_exit(int i, t_p *p)
 {
 	if (i == 0)
-		ft_putstr("Error\n");
+		write(2, "Error\n", 7);
 	if (p->a != NULL)
 		free(p->a);
 	if (p->b != NULL)

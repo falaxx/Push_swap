@@ -1,16 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 18:51:06 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/12 00:00:46 by fmerding         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
+
+void	ft_exit(int i, t_p *p)
+{
+	if (i == 0)
+		write(2, "Error\n", 7);
+	if (p->a != NULL)
+		free(p->a);
+	if (p->b != NULL)
+		free(p->b);
+	if (p->tex != NULL)
+		SDL_DestroyTexture(p->tex->texture);
+	if (p->renderer != NULL)
+		SDL_DestroyRenderer(p->renderer);
+	if (p->window != NULL)
+		SDL_DestroyWindow(p->window);
+	exit(0);
+}
 
 int		check(char *av, t_p *p)
 {
@@ -61,11 +66,6 @@ void	init(char ***split, t_p *p, int ac)
 		free_split(split, ac, p);
 	if (!(p->b = (long *)malloc(sizeof(long) * (p->size))))
 		free_split(split, ac, p);
-	if (!(p->clone = (long *)malloc(sizeof(long) * (p->size))))
-		free_split(split, ac, p);
-	p->range = p->size / 15 + 2;
-	if (p->size > 100)
-		p->range = p->size / 40 + 2;
 	fill(split, p);
 }
 
@@ -94,13 +94,17 @@ void	split(char **av, t_p *p, int ac)
 
 int		main(int ac, char **av)
 {
-	t_p	p;
+	t_p		p;
 
+	p.window = NULL;
+	p.renderer = NULL;
+	p.tex = NULL;
 	p.ac = ac - 1;
 	p.size = 0;
 	p.a = NULL;
 	p.b = NULL;
-	p.clone = NULL;
+	p.min = 10000000000;
+	p.max = -10000000000;
 	if (ac == 1)
 		ft_exit(0, &p);
 	split(av, &p, p.ac);
