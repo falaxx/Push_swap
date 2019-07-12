@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 20:36:41 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/11 22:50:34 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/12 15:35:47 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void	fill(char ***split, t_p *p)
 	}
 	p->ppx = 500/(p->max - p->min);
 	p->ppy = HEIGHT / p->size;
-	printf("min = %ld max = %ld",p->min, p->max);
 	apply(p);
 	ft_exit(1, p);
 }

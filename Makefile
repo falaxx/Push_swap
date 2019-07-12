@@ -16,7 +16,7 @@ LDFLAGS = -L libft/ -lft  -L /usr/local/include/
 
 CC = gcc
 
-# CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -g 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 04:34:23 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/11 22:53:17 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/12 15:38:57 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,6 @@ t_texture	black(t_texture tex)
 	return (tex);
 }
 
-// t_texture	red(t_texture tex, t_f *f, t_vec2 pos)
-// {
-// 	t_vec2 save;
-// 	t_vec2 next;
-//
-// 	pos.x *= f->ppx;
-// 	pos.y *= f->ppy;
-// 	pos.x += 1;
-// 	pos.y += 1;
-// 	next.x = pos.x + f->ppx - 2;
-// 	next.y = pos.y + f->ppy - 2;
-// 	save = pos;
-// 	while (pos.x < next.x)
-// 	{
-// 		while (pos.y < next.y)
-// 		{
-// 			set_pixel(&tex, 0xff0000ff, pos);
-// 			pos.y++;
-// 		}
-// 		pos.y = save.y;
-// 		pos.x++;
-// 	}
-// 	return (tex);
-// }
-//
 t_texture	blacked(t_texture tex, t_p *p, t_vec2 pos)
 {
 	t_vec2 save;
@@ -117,19 +92,13 @@ void	render(t_p *p)
 
 	while (i < p->size)
 	{
-		// while(x < WIDTH)
-		// {
+
 		pos.x = x;
 		pos2.x = x + 500;
 		pos.y = y;
 		pos2.y = y;
-		// if (p->a[i] == 10000000000)
-		// 	*p->tex = blacked(*p->tex, p, pos);
 		*p->tex = blue(*p->tex, p, pos, p->a[i]);
-		// if (p->b[i] == 10000000000)
-		// 	*p->tex = blacked(*p->tex, p, pos2);
 		*p->tex = blue(*p->tex, p, pos2, p->b[i]);
-		// }
 		i++;
 		y++;
 	}
@@ -146,10 +115,8 @@ void	apply(t_p *p)
 	*p->tex = black(*p->tex);
 	while (1)
 	{
-		while ((SDL_PollEvent(&(p->event))) != 0)
+		while ((SDL_PollEvent(&(p->event))) != -42 && get_next_line(0, &line) > 0)
 		{
-			while ((get_next_line(0, &line) > 0))
-			{
 				if (operation(p, line) == -1)
 				{
 					free(line);
@@ -159,27 +126,18 @@ void	apply(t_p *p)
 				*p->tex = black(*p->tex);
 				render(p);
 				if (p->event.type == SDL_QUIT)
-				{
-					SDL_Quit();
 					ft_exit(1, p);
-				}
 				if (p->event.type == SDL_KEYDOWN)
 				{
 					if (p->event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
-					{
-						SDL_Quit();
 						ft_exit(1, p);
-					}
 				}
-			}
-			free(line);
-			if (is_sorted(p->size, p->a) == 1)
-				ft_putstr("OK\n");
-			else
-				ft_putstr("KO\n");
-			sleep(5);
-			SDL_Quit();
-			ft_exit(1, p);
 		}
+		if (is_sorted(p->size, p->a) == 1)
+			ft_putstr("OK\n");
+		else
+			ft_putstr("KO\n");
+		SDL_Quit();
+		ft_exit(1, p);
 	}
 }
