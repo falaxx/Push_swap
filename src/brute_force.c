@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 19:34:07 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/11 19:39:54 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/13 21:42:50 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	brute_force2(t_p *p, int i, char *try)
 			i++;
 		}
 		if (try[12] != '\0')
-			algo(p);
+			algo(p, 0);
 		apply_try(try, p, 0);
 		if (is_sorted(p->size, p->a) == 1 && p->b[p->size - 1] == 10000000000)
 			break ;

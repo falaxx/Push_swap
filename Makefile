@@ -6,9 +6,11 @@ SRC_PATH = src
 
 SRC2_PATH = src2
 
-SRC_NAME = main.c swap.c push.c rotate.c rrotate.c algo.c brute_force.c check_fill.c apply_algo.c find_exit.c
+SRC_NAME = main.c swap.c push.c rotate.c rrotate.c algo.c brute_force.c\
+			check_fill.c apply_algo.c find_exit.c algo2.c
 
-SRC2_NAME = main.c check_fill.c push.c rotate.c rrotate.c swap.c sdl.c apply_color.c
+SRC2_NAME = main.c check_fill.c push.c rotate.c rrotate.c swap.c sdl.c\
+			apply.c color.c find_exit.c clone.c
 
 CPPFLAGS = -I libft/includes/ -I /usr/local/include/ -MMD
 
@@ -16,7 +18,7 @@ LDFLAGS = -L libft/ -lft  -L /usr/local/include/
 
 CC = gcc
 
-CFLAGS = -Werror -Wall -Wextra -g 
+CFLAGS = -Werror -Wall -Wextra
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -79,10 +81,6 @@ fclean: clean
 
 re: fclean
 	$(MAKE) all
-
-norme:
-	norminette $(SRC)
-	norminette $(INCLUDES)
 
 .PHONY: make clean fclean re
 

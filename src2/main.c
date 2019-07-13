@@ -1,27 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/13 22:22:44 by fmerding          #+#    #+#             */
+/*   Updated: 2019/07/14 00:17:55 by fmerding         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	ft_exit(int i, t_p *p)
-{
-	if (i == 0)
-		write(2, "Error\n", 7);
-	if (p->a != NULL)
-		free(p->a);
-	if (p->b != NULL)
-		free(p->b);
-	if (p->tex != NULL)
-		SDL_DestroyTexture(p->tex->texture);
-	if (p->renderer != NULL)
-		SDL_DestroyRenderer(p->renderer);
-	if (p->window != NULL)
-		SDL_DestroyWindow(p->window);
-	exit(0);
-}
-
-int		check(char *av, t_p *p)
+int		check(char *av, t_p *p, int j)
 {
 	int i;
 
 	i = 0;
+	if (ft_strlen(av) == 2 && av[0] == '-' && av[1] == 'v' && av[2] == '\0')
+	{
+		p->sdl = 1;
+		if (j != 0)
+			ft_exit(0, p);
+		p->size--;
+		return (0);
+	}
 	if (ft_strlen(av) > 11 || av == '\0')
 		ft_exit(0, p);
 	if (ft_atol(av) > 2147483647 || ft_atol(av) < -2147483648)
@@ -66,6 +69,11 @@ void	init(char ***split, t_p *p, int ac)
 		free_split(split, ac, p);
 	if (!(p->b = (long *)malloc(sizeof(long) * (p->size))))
 		free_split(split, ac, p);
+	if (!(p->clone = (long *)malloc(sizeof(long) * (p->size))))
+		free_split(split, ac, p);
+	p->range = p->size / 15 + 2;
+	if (p->size > 100)
+		p->range = p->size / 40 + 2;
 	fill(split, p);
 }
 
@@ -82,14 +90,15 @@ void	split(char **av, t_p *p, int ac)
 		split[i] = ft_strsplit(av[i + 1], ' ');
 		while (split[i][j] != 0)
 		{
-			check(split[i][j], p);
+			check(split[i][j], p, i);
 			j++;
 			p->size++;
 		}
 		i++;
 	}
+	if (p->size == 0 && p->sdl == 1)
+		ft_exit(0, p);
 	init(split, p, ac);
-	free_split(split, ac, p);
 }
 
 int		main(int ac, char **av)
@@ -103,10 +112,12 @@ int		main(int ac, char **av)
 	p.size = 0;
 	p.a = NULL;
 	p.b = NULL;
+	p.clone = NULL;
 	p.min = 10000000000;
 	p.max = -10000000000;
+	p.sdl = 0;
 	if (ac == 1)
-		ft_exit(0, &p);
+		ft_exit(1, &p);
 	split(av, &p, p.ac);
 	return (0);
 }

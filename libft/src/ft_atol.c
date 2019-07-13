@@ -6,15 +6,15 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 12:30:40 by fmerding          #+#    #+#             */
-/*   Updated: 2019/06/22 12:48:04 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/14 00:15:07 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 long	ft_atol(const char *nptr)
 {
-	int i;
-	long neg;
-	long nb;
+	int		i;
+	long	neg;
+	long	nb;
 
 	nb = 0;
 	neg = 1;

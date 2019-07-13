@@ -6,11 +6,59 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 20:36:41 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/11 18:35:21 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/13 22:05:48 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int		check_r(t_p *p, long *tab)
+{
+	int i;
+	int a;
+	int b;
+
+	i = 0;
+	while (tab[i] == 10000000000)
+		i++;
+	a = tab[i] - tab[i + 1];
+	if (a < 0)
+		a = tab[i + 1] - tab[i];
+	b = tab[i] - tab[p->size - 1];
+	if (b < 0)
+		b = tab[p->size - 1] - tab[i];
+	if (i < p->size - 3)
+	{
+		if (a > b)
+			return (1);
+	}
+	return (0);
+}
+
+int		check_s(t_p *p, long *tab)
+{
+	int i;
+	int a;
+	int b;
+
+	i = 0;
+	while (tab[i] == 10000000000)
+		i++;
+	if (i > p->size - 2)
+		return (0);
+	a = tab[i] - tab[i + 1];
+	if (a < 0)
+		a = tab[i + 1] - tab[i];
+	b = tab[i] - tab[i + 2];
+	if (b < 0)
+		b = tab[i + 2] - tab[i];
+	if (i < p->size - 3)
+	{
+		if (a > b)
+			return (1);
+	}
+	return (0);
+}
 
 void	check_double(t_p *p)
 {

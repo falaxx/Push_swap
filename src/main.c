@@ -6,7 +6,7 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:51:06 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/12 00:00:46 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/13 22:56:40 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	split(char **av, t_p *p, int ac)
 		i++;
 	}
 	init(split, p, ac);
-	free_split(split, ac, p);
 }
 
 int		main(int ac, char **av)
@@ -102,7 +101,7 @@ int		main(int ac, char **av)
 	p.b = NULL;
 	p.clone = NULL;
 	if (ac == 1)
-		ft_exit(0, &p);
+		ft_exit(1, &p);
 	split(av, &p, p.ac);
 	return (0);
 }

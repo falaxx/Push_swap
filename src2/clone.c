@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algo.c                                             :+:      :+:    :+:   */
+/*   clone.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 18:04:20 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/13 21:55:51 by fmerding         ###   ########.fr       */
+/*   Created: 2019/07/13 22:39:10 by fmerding          #+#    #+#             */
+/*   Updated: 2019/07/13 22:39:32 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,10 @@ long	*sort(t_p *p, long *tab)
 	return (tab);
 }
 
-int		is_sorted(int size, long *tab)
+void	clone(t_p *p)
 {
 	int i;
 
-	i = 0;
-	while (i < size - 1)
-	{
-		if (tab[i] < tab[i + 1])
-			i++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-void	algo(t_p *p, int i)
-{
 	i = 0;
 	while (i < p->size)
 	{
@@ -85,21 +72,4 @@ void	algo(t_p *p, int i)
 		i++;
 	}
 	p->clone = sort(p, p->clone);
-	while (1)
-	{
-		if (p->clone[0] == p->a[0] && p->done == 0)
-		{
-			p->clone[0] = 10000000000;
-			p->b[p->size - 1] = p->a[0];
-			p->a[0] = 10000000000;
-			ft_putstr("pb\n");
-			p->done = 1;
-		}
-		apply_algo(p, 0, 0);
-		if (p->a[p->size - 2] == 10000000000)
-			pb(p, 1);
-		if (p->b[0] != 10000000000)
-			break ;
-	}
-	algo2(p);
 }

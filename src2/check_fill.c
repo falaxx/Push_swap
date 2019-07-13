@@ -6,55 +6,11 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 20:36:41 by fmerding          #+#    #+#             */
-/*   Updated: 2019/07/12 15:35:47 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/13 22:45:42 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int		is_sorted(int size, long *tab)
-{
-	int i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		if (tab[i] < tab[i + 1])
-			i++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-int		operation(t_p *p, char *line)
-{
-	if (ft_strcmp(line, "sa") == 0)
-		sa(p, 0);
-	else if (ft_strcmp(line, "sb") == 0)
-		sb(p, 0);
-	else if (ft_strcmp(line, "ss") == 0)
-		ss(p, 0);
-	else if (ft_strcmp(line, "pa") == 0)
-		pa(p, 0);
-	else if (ft_strcmp(line, "pb") == 0)
-		pb(p, 0);
-	else if (ft_strcmp(line, "ra") == 0)
-		ra(p, 0);
-	else if (ft_strcmp(line, "rb") == 0)
-		rb(p, 0);
-	else if (ft_strcmp(line, "rr") == 0)
-		rr(p, 0, 0, 0);
-	else if (ft_strcmp(line, "rra") == 0)
-		rra(p, 0);
-	else if (ft_strcmp(line, "rrb") == 0)
-		rrb(p, 0);
-	else if (ft_strcmp(line, "rrr") == 0)
-		rrr(p, 0);
-	else
-		return (-1);
-	return (0);
-}
 
 void	check_double(t_p *p)
 {
@@ -76,13 +32,32 @@ void	check_double(t_p *p)
 	}
 }
 
+void	fill2(t_p *p)
+{
+	char *line;
+
+	line = NULL;
+	check_double(p);
+	clone(p);
+	if (p->max - p->min == 0)
+		p->ppx = 500;
+	else
+		p->ppx = 500 / (p->max - p->min);
+	p->ppy = HEIGHT / p->size;
+	if (p->sdl == 0)
+		apply(p);
+	else
+		apply_sdl(p, line);
+	ft_exit(1, p);
+}
+
 void	fill(char ***split, t_p *p)
 {
 	int i;
 	int j;
 	int k;
 
-	j = 0;
+	j = 0 + p->sdl;
 	i = 0;
 	while (i < p->size)
 	{
@@ -100,8 +75,5 @@ void	fill(char ***split, t_p *p)
 		}
 		j++;
 	}
-	p->ppx = 500/(p->max - p->min);
-	p->ppy = HEIGHT / p->size;
-	apply(p);
-	ft_exit(1, p);
+	fill2(p);
 }
