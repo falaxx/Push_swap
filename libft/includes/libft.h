@@ -6,13 +6,13 @@
 /*   By: fmerding <fmerding@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 14:38:20 by fmerding          #+#    #+#             */
-/*   Updated: 2019/06/22 12:48:00 by fmerding         ###   ########.fr       */
+/*   Updated: 2019/07/14 15:55:25 by fmerding         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 10
+# define BUFF_SIZE 1
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -39,12 +39,12 @@ typedef struct		s_vec2
 	int				y;
 }					t_vec2;
 
-typedef struct		s_gnlist
-{
-	char			*save;
+typedef struct		s_blist {
+	char			buff[BUFF_SIZE];
+	int				ret;
 	int				fd;
-	struct s_gnlist	*next;
-}					t_gnlist;
+	struct s_blist	*next;
+}					t_blist;
 
 t_list				*ft_lstnew(void const *content, size_t
 content_size);
