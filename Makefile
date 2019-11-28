@@ -28,9 +28,9 @@ OBJ_PATH = obj
 
 OBJ_PATH2 = obj2
 
-SDLFLAGS =  $(SDLINCL) -L/Users/fmerding/.brew/Cellar/sdl2/2.0.9_1/lib -lSDL2
+SDLFLAGS =  $(SDLINCL) -L/Users/fmerding/.brew/Cellar/sdl2/2.0.10/lib -lSDL2
 
-SDLINCL = -I /Users/fmerding/.brew/Cellar/sdl2/2.0.9_1/include/SDL2
+SDLINCL = -I /Users/fmerding/.brew/Cellar/sdl2/2.0.10/include/SDL2
 
 HEADER_PATH = includes/
 
