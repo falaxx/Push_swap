@@ -12,6 +12,8 @@ any duplicates.
 - b is empty
 
 The goal is to sort in ascending order numbers into stack a.
+
+![](49.gif)
 To do this you have the following operations at your disposal:
 
 - sa : swap a - swap the first 2 elements at the top of stack a. 
@@ -40,6 +42,8 @@ I chose to first see if there is a "bruteforce" solution where i look if there i
 If there is no easy bruteforce solution my alorithm performs a enhanced quicksort to push every integers on the B stack.
 
 Then a simple selection sort push everything back in order on the A stack.
+
+![](99.gif)
 
 ## Installation 
 
