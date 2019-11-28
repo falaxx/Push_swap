@@ -55,10 +55,7 @@ Then do
 ```
 make
 ```
-or 
-```
-make re
-```
+
 ## Usage 
 You will first choose an ARG composed by integers.
 Example : 
