@@ -7,8 +7,6 @@ You have at your disposal a set of int values, 2 stacks and a set of instruction
 
 Those 2 stacks are named a and b.
 
-To start with:
-
 - a contains a random number of either positive or negative numbers without
 any duplicates.
 - b is empty
@@ -35,7 +33,13 @@ We needed to write 2 programs in C:
 
 • The second one called push_swap which calculates and displays on the standard output the smallest progam using Push_swap instruction language that sorts integer arguments received.
 
-![](fdf.gif)
+## Optimisation
+
+I chose to first see if there is a "bruteforce" solution where i look if there is a way wich doesn't involve the B stack, so only using the sa, ra, and rra operation.
+
+If there is no easy bruteforce solution my alorithm performs a enhanced quicksort to push every integers on the B stack.
+
+Then a simple selection sort push everything back in order on the A stack.
 
 ## Installation 
 
@@ -52,18 +56,26 @@ or
 make re
 ```
 ## Usage 
-You will choose an ARG composed by integers.
+You will first choose an ARG composed by integers.
 Example : 
 ```
 ARG="4 67 3 87 23"; 
 ```
 100 shuffled numbers :
 ```
-ARG=ruby -e "puts (0..99).to_a.shuffle.join(' ')"
+ARG=`ruby -e "puts (0..99).to_a.shuffle.join(' ')"`
 ```
 
-If you want to see the number of operations required: 
+Then if you want to see the number of operations required: 
 ```
 ./push_swap $ARG | wc -l
+```
+Now do everything : 
+```
+ARG=`ruby -e "puts (0..99).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+```
+With visualiation :
+```
+ARG=`ruby -e "puts (0..99).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker -v $ARG
 ```
 
